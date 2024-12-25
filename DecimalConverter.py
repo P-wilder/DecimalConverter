@@ -114,29 +114,27 @@ class DecimalConverter:
         def convertFromBinary(self, binaryValue=''):
                 if binaryValue == '':
                     binaryValue = input("Please enter binary value: ")
-                    self.convertFromBinary(binaryValue)
+                    return self.convertFromBinary(binaryValue)
                 else:
                     decimal = 0
                     for i in range(len(binaryValue)):
                         decimal += int(binaryValue[-(i + 1)]) * (2 ** i)
-                    self.input(decimal)
                     return decimal
         
         def convertFromOctal(self, octalValue=''):
             if octalValue == '':
                 octalValue = input("Please enter octal value: ")
-                self.convertFromOctal(octalValue)
+                return self.convertFromOctal(octalValue)
             else:
                 decimal = 0
                 for i in range(len(octalValue)):
                     decimal += int(octalValue[-(i + 1)]) * (8 ** i)
-                self.input(decimal)
                 return decimal
             
         def convertFromHex(self, hexValue=''):
             if hexValue == '':
                 hexValue = input("Please enter hex value: ")
-                self.convertFromHex(hexValue)
+                return self.convertFromHex(hexValue)
             else:
                 decimal = 0
                 for i in range(len(hexValue)):
@@ -155,7 +153,6 @@ class DecimalConverter:
                             decimal += 15 * (16 ** i)
                         case _:
                             decimal += int(hexValue[-(i + 1)]) * (16 ** i)
-                self.input(decimal)
                 return decimal
                             
         def printDeci(self):
@@ -171,7 +168,7 @@ class DecimalConverter:
                 print("Binary: {}".format(self.binary))
         
         def printAll(self):
-                print("Decimal: {}".format(self.deci))
+                self.printDeci()
                 self.printBinary()
                 self.printOctal()
                 self.printHex()
@@ -208,60 +205,54 @@ class DecimalConverter:
                             case _:
                                 print("Please enter a valid choice.")
                     case '2':
+                        if function != '6':
+                            decimal = self.convertFromBinary()
                         match function:
                             case '1':
-                                self.convertFromBinary()
+                                self.input(decimal)
                             case '2':
-                                decimal = self.convertFromBinary()
                                 self.addDeci(decimal)
                             case '3':
-                                decimal = self.convertFromBinary()
                                 self.multiDeci(decimal)
                             case '4':
-                                decimal = self.convertFromBinary()
                                 self.subDeci(decimal)
                             case '5':
-                                decimal = self.convertFromBinary()
                                 self.divDeci(decimal)
                             case '6':
                                 self.printBinary()
                             case _:
                                 print("Please enter a valid choice.")
                     case '3':
+                        if function != '6':
+                            decimal = self.convertFromOctal()
                         match function:
                             case '1':
-                                self.convertFromOctal()
+                                self.input(decimal)
                             case '2':
-                                decimal = self.convertFromOctal()
                                 self.addDeci(decimal)
                             case '3':
-                                decimal = self.convertFromOctal()
                                 self.multiDeci(decimal)
                             case '4':
-                                decimal = self.convertFromOctal()
                                 self.subDeci(decimal)
                             case '5':
-                                decimal = self.convertFromOctal()
                                 self.divDeci(decimal)
                             case '6':
                                 self.printOctal()
                             case _:
                                 print("Please enter a valid choice.")
                     case '4':
+                        if function != '6':
+                            decimal = self.convertFromHex()
                         match function:
                             case '1':
-                                self.convertFromHex()
+                                self.input(decimal)
                             case '2':
-                                decimal = self.convertFromHex()
                                 self.addDeci(decimal)
                             case '3':
-                                decimal = self.convertFromHex()
                                 self.multiDeci(decimal)
                             case '4':
-                                decimal = self.convertFromHex()
                                 self.subDeci(decimal)
                             case '5':
-                                decimal = self.convertFromHex()
                                 self.divDeci(decimal)
                             case '6':
                                 self.printHex()
