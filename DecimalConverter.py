@@ -158,6 +158,9 @@ class DecimalConverter:
                 self.input(decimal)
                 return decimal
                             
+        def printDeci(self):
+            print("Decimal: {}".format(self.deci))
+                            
         def printHex(self):
                 print("Hexadecimal: {}".format(self.hex))
                 
@@ -172,17 +175,103 @@ class DecimalConverter:
                 self.printBinary()
                 self.printOctal()
                 self.printHex()
-                        
+                
+        def main(self):
+            base = ''
+            function = ''
+            value = 0
+            while base != '6':
+                print("1. Decimal\n2. Binary\n3. Octal\n4. Hexadecimal\n5. Print all\n6. Quit")
+                base = input("Please select a base: ")
+                if base == '6':
+                    return
+                if base != '5':
+                    print("1. Convert from selected base\n2. Add\n3. Multiply\n4. Subtract\n5. Divide\n6. Print")
+                    function = input("Please select a function: ")
+                if function != '1' and function != '6' and base == '1':
+                    value = int(input("Please enter a decimal value: "))
+                match base:
+                    case '1':
+                        match function:
+                            case '1':
+                                self.input()
+                            case '2':
+                                self.addDeci(value)
+                            case '3':
+                                self.multiDeci(value)
+                            case '4':
+                                self.subDeci(value)
+                            case '5':
+                                self.divDeci(value)
+                            case '6':
+                                self.printDeci()
+                            case _:
+                                print("Please enter a valid choice.")
+                    case '2':
+                        match function:
+                            case '1':
+                                self.convertFromBinary()
+                            case '2':
+                                decimal = self.convertFromBinary()
+                                self.addDeci(decimal)
+                            case '3':
+                                decimal = self.convertFromBinary()
+                                self.multiDeci(decimal)
+                            case '4':
+                                decimal = self.convertFromBinary()
+                                self.subDeci(decimal)
+                            case '5':
+                                decimal = self.convertFromBinary()
+                                self.divDeci(decimal)
+                            case '6':
+                                self.printBinary()
+                            case _:
+                                print("Please enter a valid choice.")
+                    case '3':
+                        match function:
+                            case '1':
+                                self.convertFromOctal()
+                            case '2':
+                                decimal = self.convertFromOctal()
+                                self.addDeci(decimal)
+                            case '3':
+                                decimal = self.convertFromOctal()
+                                self.multiDeci(decimal)
+                            case '4':
+                                decimal = self.convertFromOctal()
+                                self.subDeci(decimal)
+                            case '5':
+                                decimal = self.convertFromOctal()
+                                self.divDeci(decimal)
+                            case '6':
+                                self.printOctal()
+                            case _:
+                                print("Please enter a valid choice.")
+                    case '4':
+                        match function:
+                            case '1':
+                                self.convertFromHex()
+                            case '2':
+                                decimal = self.convertFromHex()
+                                self.addDeci(decimal)
+                            case '3':
+                                decimal = self.convertFromHex()
+                                self.multiDeci(decimal)
+                            case '4':
+                                decimal = self.convertFromHex()
+                                self.subDeci(decimal)
+                            case '5':
+                                decimal = self.convertFromHex()
+                                self.divDeci(decimal)
+                            case '6':
+                                self.printHex()
+                            case _:
+                                print("Please enter a valid choice.")
+                    case '5':
+                        self.printAll()
+                    case '6':
+                        return
                         
 if __name__ == "__main__":
         DC = DecimalConverter()
-        DC.input()
-        print(DC)
-        DC.multiDeci(20)
-        print(DC)
-        DC.convertFromBinary()
-        print(DC)
-        DC.convertFromOctal()
-        print(DC)
-        DC.convertFromHex()
-        print(DC)
+        DC.main()
