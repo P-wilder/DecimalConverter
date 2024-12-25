@@ -4,6 +4,9 @@ class DecimalConverter:
                 self.binary = None
                 self.octal = None
                 self.hex = None
+                self.binarylist = []
+                self.octallist = []
+                self.hexlist = []
                 
         def __str__(self):
                 str = ("Decimal: {}\n".format(self.deci) + "Binary: {}\n".format(self.binary) +
@@ -20,87 +23,91 @@ class DecimalConverter:
                 self.convertToHex(self.deci)
                 
         def convertToBinary(self, value=None):
-                if self.deci == None or value == None:
+                if value == None:
                         self.deci = int(input("Please enter decimal value: "))
                         self.convertToBinary(self.deci)
                 else:
                         decimal = value
-                        binarylist = []
                         decimal
+                        self.binarylist.clear()
                         while decimal > 0:
-                                binarylist.insert(0, decimal%2)
+                                self.binarylist.insert(0, decimal%2)
                                 decimal = decimal//2
                         strbinary = ''
-                        for i in binarylist:
+                        for i in self.binarylist:
                                 strbinary += str(i)
                         self.binary = strbinary
                         
-        def convertToOctal(self, value):
-                if self.deci == None:
+        def convertToOctal(self, value=None):
+                if value == None:
                         self.deci = int(input("Please enter decimal value: "))
                         self.convertToOctal(self.deci)
                 else:
                         decimal = value
-                        octallist = []
+                        self.octallist.clear()
                         decimaltodivide = decimal
                         while decimaltodivide > 0:
-                                octallist.insert(0, decimaltodivide%8)
+                                self.octallist.insert(0, decimaltodivide%8)
                                 decimaltodivide = decimaltodivide//8
                         stroctal= ''
-                        for i in octallist:
+                        for i in self.octallist:
                                 stroctal += str(i)
                         self.octal = stroctal
         
-        def convertToHex(self, value):
-                if self.deci == None:
+        def convertToHex(self, value=None):
+                if value == None:
                         self.deci = int(input("Please enter decimal value: "))
                         self.convertToHex(self.deci)
                 else:
                         decimal = value
-                        hexlist = []
+                        self.hexlist.clear()
                         decimaltodivide = decimal
                         while decimaltodivide > 0:
                                 if decimaltodivide % 16 > 9:
                                         match decimaltodivide % 16:
                                                 case 10:
-                                                        hexlist.insert(0, 'A')
+                                                        self.hexlist.insert(0, 'A')
                                                         decimaltodivide = decimaltodivide // 16
                                                 case 11:
-                                                        hexlist.insert(0, 'B')
+                                                        self.hexlist.insert(0, 'B')
                                                         decimaltodivide = decimaltodivide // 16
                                                 case 12:
-                                                        hexlist.insert(0, 'C')
+                                                        self.hexlist.insert(0, 'C')
                                                         decimaltodivide = decimaltodivide // 16
                                                 case 13:
-                                                        hexlist.insert(0, 'D')
+                                                        self.hexlist.insert(0, 'D')
                                                         decimaltodivide = decimaltodivide // 16
                                                 case 14:
-                                                        hexlist.insert(0, 'E')
+                                                        self.hexlist.insert(0, 'E')
                                                         decimaltodivide = decimaltodivide // 16
                                                 case 15:
-                                                        hexlist.insert(0, 'F')
+                                                        self.hexlist.insert(0, 'F')
                                                         decimaltodivide = decimaltodivide // 16
                                 else:
-                                        hexlist.insert(0, decimaltodivide%16)
+                                        self.hexlist.insert(0, decimaltodivide%16)
                                         decimaltodivide = decimaltodivide // 16
                         strhex= ''
-                        for i in hexlist:
+                        for i in self.hexlist:
                                 strhex += str(i)
                         self.hex = strhex
                         
         def addDeci(self, value=0):
+                print("Adding {a} to {b}".format(a=self.deci, b=value))
                 self.deci += value
                 self.input(self.deci)
         
         def multiDeci(self, value=1):
+                print("Multiplying {a} by {b}".format(a=self.deci, b=value))
                 self.deci *= value
                 self.input(self.deci)
                 
         def subDeci(self, value=0):
+                print("Subtracting {a} by {b}".format(a=self.deci, b=value))
                 self.deci-= value
                 self.input(self.deci)
                 
         def divDeci(self, value=1):
+                print("Dividing {a} by {b}".format(a=self.deci, b=value))
                 self.deci = self.deci / value
                 self.input(self.deci)
                         
@@ -122,7 +129,7 @@ class DecimalConverter:
                         
 if __name__ == "__main__":
         DC = DecimalConverter()
-        DC.input(500)
+        DC.input()
         print(DC)
         DC.multiDeci(20)
         print(DC)
