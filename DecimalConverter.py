@@ -1,17 +1,20 @@
 class DecimalConverter:
         def __init__(self):
-                self.deci = None
-                self.binary = None
-                self.octal = None
-                self.hex = None
-                self.binarylist = []
-                self.octallist = []
-                self.hexlist = []
+                self.deci = 0
+                self.binary = '0'
+                self.octal = '0'
+                self.hex = '0'
                 
         def __str__(self):
                 str = ("Decimal: {}\n".format(self.deci) + "Binary: {}\n".format(self.binary) +
                 "Octal: {}\n".format(self.octal) + "Hexadecimal: {}".format(self.hex))
                 return str
+            
+        def setAlltoZero(self):
+            self.deci = 0
+            self.binary = '0'
+            self.octal = '0'
+            self.hex = '0'
                 
         def input(self, value=None):
                 if value == None:
@@ -29,12 +32,12 @@ class DecimalConverter:
                 else:
                         decimal = value
                         decimal
-                        self.binarylist.clear()
+                        binarylist = []
                         while decimal > 0:
-                                self.binarylist.insert(0, decimal%2)
+                                binarylist.insert(0, decimal%2)
                                 decimal = decimal//2
                         strbinary = ''
-                        for i in self.binarylist:
+                        for i in binarylist:
                                 strbinary += str(i)
                         self.binary = strbinary
                         
@@ -44,13 +47,13 @@ class DecimalConverter:
                         self.convertToOctal(self.deci)
                 else:
                         decimal = value
-                        self.octallist.clear()
+                        octallist = []
                         decimaltodivide = decimal
                         while decimaltodivide > 0:
-                                self.octallist.insert(0, decimaltodivide%8)
+                                octallist.insert(0, decimaltodivide%8)
                                 decimaltodivide = decimaltodivide//8
                         stroctal= ''
-                        for i in self.octallist:
+                        for i in octallist:
                                 stroctal += str(i)
                         self.octal = stroctal
         
@@ -60,39 +63,39 @@ class DecimalConverter:
                         self.convertToHex(self.deci)
                 else:
                         decimal = value
-                        self.hexlist.clear()
+                        hexlist = []
                         decimaltodivide = decimal
                         while decimaltodivide > 0:
                                 if decimaltodivide % 16 > 9:
                                         match decimaltodivide % 16:
                                                 case 10:
-                                                        self.hexlist.insert(0, 'A')
+                                                        hexlist.insert(0, 'A')
                                                         decimaltodivide = decimaltodivide // 16
                                                 case 11:
-                                                        self.hexlist.insert(0, 'B')
+                                                        hexlist.insert(0, 'B')
                                                         decimaltodivide = decimaltodivide // 16
                                                 case 12:
-                                                        self.hexlist.insert(0, 'C')
+                                                        hexlist.insert(0, 'C')
                                                         decimaltodivide = decimaltodivide // 16
                                                 case 13:
-                                                        self.hexlist.insert(0, 'D')
+                                                        hexlist.insert(0, 'D')
                                                         decimaltodivide = decimaltodivide // 16
                                                 case 14:
-                                                        self.hexlist.insert(0, 'E')
+                                                        hexlist.insert(0, 'E')
                                                         decimaltodivide = decimaltodivide // 16
                                                 case 15:
-                                                        self.hexlist.insert(0, 'F')
+                                                        hexlist.insert(0, 'F')
                                                         decimaltodivide = decimaltodivide // 16
                                 else:
-                                        self.hexlist.insert(0, decimaltodivide%16)
+                                        hexlist.insert(0, decimaltodivide%16)
                                         decimaltodivide = decimaltodivide // 16
                         strhex= ''
-                        for i in self.hexlist:
+                        for i in hexlist:
                                 strhex += str(i)
                         self.hex = strhex
                         
         def addDeci(self, value=0):
-                print("Adding {a} to {b}".format(a=self.deci, b=value))
+                print("Adding {b} to {a}".format(a=self.deci, b=value))
                 self.deci += value
                 self.input(self.deci)
         
@@ -102,6 +105,9 @@ class DecimalConverter:
                 self.input(self.deci)
                 
         def subDeci(self, value=0):
+            if self.deci < value:
+                self.setAlltoZero()
+            else:
                 print("Subtracting {a} by {b}".format(a=self.deci, b=value))
                 self.deci-= value
                 self.input(self.deci)
@@ -200,19 +206,20 @@ class DecimalConverter:
                         self.printAll()
                     case '6':
                         return
-                match function:
-                    case '1':
-                        self.input(decimal)
-                    case '2':
-                        self.addDeci(decimal)
-                    case '3':
-                        self.multiDeci(decimal)
-                    case '4':
-                        self.subDeci(decimal)
-                    case '5':
-                        self.divDeci(decimal)
-                    case _:
-                        print("Please enter a valid choice.")
+                if base != '5':
+                    match function:
+                        case '1':
+                            self.input(decimal)
+                        case '2':
+                            self.addDeci(decimal)
+                        case '3':
+                            self.multiDeci(decimal)
+                        case '4':
+                            self.subDeci(decimal)
+                        case '5':
+                            self.divDeci(decimal)
+                        case _:
+                            print("Please enter a valid choice.")
                         
 if __name__ == "__main__":
         DC = DecimalConverter()
