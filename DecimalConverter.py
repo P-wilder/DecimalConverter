@@ -15,16 +15,16 @@ class DecimalConverter:
                         self.deci = int(input("Please enter decimal value: "))
                 else:
                         self.deci = value
-                self.convertToBinary()
-                self.convertToOctal()
-                self.convertToHex()
+                self.convertToBinary(self.deci)
+                self.convertToOctal(self.deci)
+                self.convertToHex(self.deci)
                 
-        def convertToBinary(self):
-                if self.deci == None:
+        def convertToBinary(self, value=None):
+                if self.deci == None or value == None:
                         self.deci = int(input("Please enter decimal value: "))
-                        self.convertToBinary()
+                        self.convertToBinary(self.deci)
                 else:
-                        decimal = self.deci
+                        decimal = value
                         binarylist = []
                         decimal
                         while decimal > 0:
@@ -35,12 +35,12 @@ class DecimalConverter:
                                 strbinary += str(i)
                         self.binary = strbinary
                         
-        def convertToOctal(self):
+        def convertToOctal(self, value):
                 if self.deci == None:
                         self.deci = int(input("Please enter decimal value: "))
-                        self.convertToOctal()
+                        self.convertToOctal(self.deci)
                 else:
-                        decimal = self.deci
+                        decimal = value
                         octallist = []
                         decimaltodivide = decimal
                         while decimaltodivide > 0:
@@ -51,12 +51,12 @@ class DecimalConverter:
                                 stroctal += str(i)
                         self.octal = stroctal
         
-        def convertToHex(self):
+        def convertToHex(self, value):
                 if self.deci == None:
                         self.deci = int(input("Please enter decimal value: "))
-                        self.convertToHex()
+                        self.convertToHex(self.deci)
                 else:
-                        decimal = self.deci
+                        decimal = value
                         hexlist = []
                         decimaltodivide = decimal
                         while decimaltodivide > 0:
@@ -88,6 +88,22 @@ class DecimalConverter:
                                 strhex += str(i)
                         self.hex = strhex
                         
+        def addDeci(self, value=0):
+                self.deci += value
+                self.input(self.deci)
+        
+        def multiDeci(self, value=1):
+                self.deci *= value
+                self.input(self.deci)
+                
+        def subDeci(self, value=0):
+                self.deci-= value
+                self.input(self.deci)
+                
+        def divDeci(self, value=1):
+                self.deci = self.deci / value
+                self.input(self.deci)
+                        
         def printHex(self):
                 print("Hexadecimal: {}".format(self.hex))
                 
@@ -106,5 +122,7 @@ class DecimalConverter:
                         
 if __name__ == "__main__":
         DC = DecimalConverter()
-        DC.input()
+        DC.input(500)
+        print(DC)
+        DC.multiDeci(20)
         print(DC)
