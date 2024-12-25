@@ -186,20 +186,20 @@ class DecimalConverter:
                     print("1. Convert from selected base\n2. Add\n3. Multiply\n4. Subtract\n5. Divide\n6. Print")
                     function = input("Please select a function: ")
                 if function != '1' and function != '6' and base == '1':
-                    value = int(input("Please enter a decimal value: "))
+                    value = input("Please enter a decimal value: ")
                 match base:
                     case '1':
                         match function:
                             case '1':
                                 self.input()
                             case '2':
-                                self.addDeci(value)
+                                self.addDeci(int(value))
                             case '3':
-                                self.multiDeci(value)
+                                self.multiDeci(int(value))
                             case '4':
-                                self.subDeci(value)
+                                self.subDeci(int(value))
                             case '5':
-                                self.divDeci(value)
+                                self.divDeci(int(value))
                             case '6':
                                 self.printDeci()
                             case _:
