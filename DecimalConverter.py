@@ -119,8 +119,44 @@ class DecimalConverter:
                     decimal = 0
                     for i in range(len(binaryValue)):
                         decimal += int(binaryValue[-(i + 1)]) * (2 ** i)
-                    print(decimal)
                     self.input(decimal)
+                    return decimal
+        
+        def convertFromOctal(self, octalValue=''):
+            if octalValue == '':
+                octalValue = input("Please enter octal value: ")
+                self.convertFromOctal(octalValue)
+            else:
+                decimal = 0
+                for i in range(len(octalValue)):
+                    decimal += int(octalValue[-(i + 1)]) * (8 ** i)
+                self.input(decimal)
+                return decimal
+            
+        def convertFromHex(self, hexValue=''):
+            if hexValue == '':
+                hexValue = input("Please enter hex value: ")
+                self.convertFromHex(hexValue)
+            else:
+                decimal = 0
+                for i in range(len(hexValue)):
+                    match hexValue[-(i + 1)].upper():
+                        case 'A':
+                            decimal += 10 * (16 ** i)
+                        case 'B':
+                            decimal += 11 * (16 ** i)
+                        case 'C':
+                            decimal += 12 * (16 ** i)
+                        case 'D':
+                            decimal += 13 * (16 ** i)
+                        case 'E':
+                            decimal += 14 * (16 ** i)
+                        case 'F':
+                            decimal += 15 * (16 ** i)
+                        case _:
+                            decimal += int(hexValue[-(i + 1)]) * (16 ** i)
+                self.input(decimal)
+                return decimal
                             
         def printHex(self):
                 print("Hexadecimal: {}".format(self.hex))
@@ -145,4 +181,8 @@ if __name__ == "__main__":
         DC.multiDeci(20)
         print(DC)
         DC.convertFromBinary()
+        print(DC)
+        DC.convertFromOctal()
+        print(DC)
+        DC.convertFromHex()
         print(DC)
