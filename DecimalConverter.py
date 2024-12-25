@@ -110,7 +110,18 @@ class DecimalConverter:
                 print("Dividing {a} by {b}".format(a=self.deci, b=value))
                 self.deci = self.deci / value
                 self.input(self.deci)
-                        
+                
+        def convertFromBinary(self, binaryValue=''):
+                if binaryValue == '':
+                    binaryValue = input("Please enter binary value: ")
+                    self.convertFromBinary(binaryValue)
+                else:
+                    decimal = 0
+                    for i in range(len(binaryValue)):
+                        decimal += int(binaryValue[-(i + 1)]) * (2 ** i)
+                    print(decimal)
+                    self.input(decimal)
+                            
         def printHex(self):
                 print("Hexadecimal: {}".format(self.hex))
                 
@@ -132,4 +143,6 @@ if __name__ == "__main__":
         DC.input()
         print(DC)
         DC.multiDeci(20)
+        print(DC)
+        DC.convertFromBinary()
         print(DC)
