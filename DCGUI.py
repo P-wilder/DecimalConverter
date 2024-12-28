@@ -3,7 +3,7 @@ from DecimalConverter import DecimalConverter as DC
 
 root = tk.Tk()
 
-root.geometry("300x500") 
+root.geometry("450x600") 
 root.title("Decimal Converter")
 
 textbox = tk.Text(root, font=("Arial", 14), height=1, width=25)
@@ -17,6 +17,7 @@ buttonframe.columnconfigure(0, weight=1)
 buttonframe.columnconfigure(1, weight=1)
 buttonframe.columnconfigure(2, weight=1)
 buttonframe.columnconfigure(3, weight=1)
+buttonframe.columnconfigure(4, weight=1)
 
 btn1 = tk.Button(buttonframe, text="1", font=('Arial', 16))
 btn1.grid(row=0, column=0, sticky=tk.W+tk.E)
@@ -72,11 +73,23 @@ btn17.grid(row=0, column=4, sticky=tk.W+tk.E)
 btn18 = tk.Button(buttonframe, text="-", font=('Arial', 16))
 btn18.grid(row=1, column=4, sticky=tk.W+tk.E)
 
-btn19 = tk.Button(buttonframe, text="X", font=('Arial', 16))
+btn19 = tk.Button(buttonframe, text="*", font=('Arial', 16))
 btn19.grid(row=2, column=4, sticky=tk.W+tk.E)
 
 btn20 = tk.Button(buttonframe, text="/", font=('Arial', 16))
 btn20.grid(row=3, column=4, sticky=tk.W+tk.E)
+
+btn21 = tk.Button(buttonframe, text="Decimal", font=('Arial', 16))
+btn21.grid(row=4, column=0, sticky=tk.W+tk.E)
+
+btn22 = tk.Button(buttonframe, text="Binary", font=('Arial', 16))
+btn22.grid(row=4, column=1, sticky=tk.W+tk.E)
+
+btn23 = tk.Button(buttonframe, text="Octal", font=('Arial', 16))
+btn23.grid(row=4, column=2, sticky=tk.W+tk.E)
+
+btn24 = tk.Button(buttonframe, text="Hexadecimal", font=('Arial', 16))
+btn24.grid(row=4, column=3, sticky=tk.W+tk.E)
 
 buttonframe.pack(fill='both')
 
