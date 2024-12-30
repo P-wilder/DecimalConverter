@@ -4,6 +4,8 @@ class DecimalConverter:
                 self.binary = '0'
                 self.octal = '0'
                 self.hex = '0'
+                if __name__ == "__main__":
+                    self.main()
                 
         def __str__(self):
                 str = ("Decimal: {}\n".format(self.deci) + "Binary: {}\n".format(self.binary) +
@@ -40,6 +42,7 @@ class DecimalConverter:
                         for i in binarylist:
                                 strbinary += str(i)
                         self.binary = strbinary
+                        return self.binary
                         
         def convertToOctal(self, value=None):
                 if value == None:
@@ -56,6 +59,7 @@ class DecimalConverter:
                         for i in octallist:
                                 stroctal += str(i)
                         self.octal = stroctal
+                        return self.octal
         
         def convertToHex(self, value=None):
                 if value == None:
@@ -93,6 +97,7 @@ class DecimalConverter:
                         for i in hexlist:
                                 strhex += str(i)
                         self.hex = strhex
+                        return self.hex
                         
         def addDeci(self, value=0):
                 print("Adding {b} to {a}".format(a=self.deci, b=value))
@@ -222,5 +227,4 @@ class DecimalConverter:
                             print("Please enter a valid choice.")
                         
 if __name__ == "__main__":
-        DC = DecimalConverter()
-        DC.main()
+        DecimalConverter()
