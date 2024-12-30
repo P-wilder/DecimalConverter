@@ -54,6 +54,24 @@ class CalculatorGUI:
     def setHexadecimal(self):
         self.setBase('h')
         
+    def setOperator(self, operator):
+        if self.isNum1Done == False:
+            self.operator = operator
+            self.isNum1Done = True
+            self.entry.delete(0, 'end')
+        
+    def setAdd(self):
+        self.setOperator('+')
+        
+    def setSubtract(self):
+        self.setOperator('-')
+        
+    def setMultiply(self):
+        self.setOperator('*')
+        
+    def setDivide(self):
+        self.setOperator('/')
+        
     def addNumberToString(self, value):
         if self.isNum1Done == False:
             if self.numberstr1 != '' :
@@ -69,6 +87,7 @@ class CalculatorGUI:
     def clear(self):
         self.numberstr1 = ''
         self.numberstr2 = ''
+        self.isNum1Done = False
         self.entry.delete(0, "end")
         
     def add1(self):
@@ -153,24 +172,24 @@ class CalculatorGUI:
         
     def add8(self):
         if self.isNum1Done == False:
-            if self.base1 != 'h' or self.base1 != 'd':
+            if self.base1 != 'h' and self.base1 != 'd':
                 pass
             else:
                 self.addNumberToString('8')
         else:
-            if self.base2 != 'h' or self.base2 != 'd':
+            if self.base2 != 'h' and self.base2 != 'd':
                 pass
             else:
                 self.addNumberToString('8')
         
     def add9(self):
         if self.isNum1Done == False:
-            if self.base1 != 'h' or self.base1 != 'd':
+            if self.base1 != 'h' and self.base1 != 'd':
                 pass
             else:
                 self.addNumberToString('9')
         else:
-            if self.base2 != 'h' or self.base2 != 'd':
+            if self.base2 != 'h' and self.base2 != 'd':
                 pass
             else:
                 self.addNumberToString('9')
@@ -289,13 +308,13 @@ class CalculatorGUI:
         btnF.grid(row=3, column=2, sticky=tk.W+tk.E)
         btn0 = tk.Button(self.buttonframe, text="0", font=('Arial', 16), command=self.add0)
         btn0.grid(row=3, column=3, sticky=tk.W+tk.E)
-        btnAdd = tk.Button(self.buttonframe, text="+", font=('Arial', 16))
+        btnAdd = tk.Button(self.buttonframe, text="+", font=('Arial', 16), command=self.setAdd)
         btnAdd.grid(row=0, column=4, sticky=tk.W+tk.E)
-        btnSub = tk.Button(self.buttonframe, text="-", font=('Arial', 16))
+        btnSub = tk.Button(self.buttonframe, text="-", font=('Arial', 16), command=self.setSubtract)
         btnSub.grid(row=1, column=4, sticky=tk.W+tk.E)
-        btnMult = tk.Button(self.buttonframe, text="*", font=('Arial', 16))
+        btnMult = tk.Button(self.buttonframe, text="*", font=('Arial', 16), command=self.setMultiply)
         btnMult.grid(row=2, column=4, sticky=tk.W+tk.E)
-        btnDiv = tk.Button(self.buttonframe, text="/", font=('Arial', 16))
+        btnDiv = tk.Button(self.buttonframe, text="/", font=('Arial', 16), command=self.setDivide)
         btnDiv.grid(row=3, column=4, sticky=tk.W+tk.E)
         btnDeci = tk.Button(self.buttonframe, text="Decimal", font=('Arial', 16), command=self.setDecimal)
         btnDeci.grid(row=4, column=0, sticky=tk.W+tk.E)
