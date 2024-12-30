@@ -6,7 +6,7 @@ class CalculatorGUI:
         
         self.root = tk.Tk()
         self.root.geometry("450x600") 
-        self.root.title("Decimal Converter")
+        self.root.title("Conversion Calculator")
         self.entry = tk.Entry(self.root, font=("Arial", 32))
         self.entry.pack()
         self.buttonframe = tk.Frame(self.root)
