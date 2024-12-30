@@ -4,6 +4,7 @@ class DecimalConverter:
                 self.binary = '0'
                 self.octal = '0'
                 self.hex = '0'
+                self.main()
                 
         def __str__(self):
                 str = ("Decimal: {}\n".format(self.deci) + "Binary: {}\n".format(self.binary) +
@@ -222,5 +223,4 @@ class DecimalConverter:
                             print("Please enter a valid choice.")
                         
 if __name__ == "__main__":
-        DC = DecimalConverter()
-        DC.main()
+        DecimalConverter()
