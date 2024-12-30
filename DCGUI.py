@@ -18,6 +18,8 @@ class CalculatorGUI:
         self.base1 = 'd'
         self.base2 = 'd'
         self.operator = ''
+        self.converter = DC()
+        self.isCalculated = False
         
         self.root.mainloop()
         
@@ -31,6 +33,45 @@ class CalculatorGUI:
                 self.base1 = 'o'
             elif base == 'h':
                 self.base1 = 'h'
+        elif self.isCalculated == True:
+            if base == 'd':
+                match self.base1:
+                    case 'b':
+                        self.numberstr1 = self.converter.convertFromBinary(self.numberstr1)
+                    case 'o':
+                        self.numberstr1 = self.converter.convertFromOctal(self.numberstr1)
+                    case 'h':
+                        self.numberstr1 = self.converter.convertFromHex(self.numberstr1)
+                self.base1 = 'd'
+            elif base == 'b':
+                match self.base1:
+                    case 'd':
+                        self.numberstr1 = self.converter.convertToBinary(int(self.numberstr1))
+                    case 'o':
+                        self.numberstr1 = self.converter.convertToBinary(int(self.converter.convertFromOctal(self.numberstr1)))
+                    case 'h':
+                        self.numberstr1 = self.converter.convertToBinary(int(self.converter.convertFromHex(self.numberstr1)))
+                self.base1 = 'b'
+            elif base == 'o':
+                match self.base1:
+                    case 'd':
+                        self.numberstr1 = self.converter.convertToOctal(int(self.numberstr1))
+                    case 'b':
+                        self.numberstr1 = self.converter.convertToOctal(int(self.converter.convertFromBinary(self.numberstr1)))
+                    case 'h':
+                        self.numberstr1 = self.converter.convertToOctal(int(self.converter.convertFromHex(self.numberstr1)))
+                self.base1 = 'o'
+            elif base == 'h':
+                match self.base1:
+                    case 'd':
+                        self.numberstr1 = self.converter.convertToHex(int(self.numberstr1))
+                    case 'b':
+                        self.numberstr1 = self.converter.convertToHex(int(self.converter.convertFromBinary(self.numberstr1)))
+                    case 'o':
+                        self.numberstr1 = self.converter.convertToHex(int(self.converter.convertFromOctal(self.numberstr1)))
+                self.base1 = 'h'
+            self.entry.delete(0, 'end')
+            self.entry.insert(0, self.numberstr1)
         elif self.isNum1Done == True and self.numberstr2 == '':
             if base == 'd':
                 self.base2 = 'd'
@@ -67,7 +108,7 @@ class CalculatorGUI:
         self.setOperator('-')
         
     def setMultiply(self):
-        self.setOperator('*')
+        self.setOperator('x')
         
     def setDivide(self):
         self.setOperator('/')
@@ -268,6 +309,48 @@ class CalculatorGUI:
     
     def add0(self):
         self.addNumberToString('0')
+        
+    def calculate(self):
+        if self.numberstr2 != '':
+            decimal1 = self.numberstr1
+            decimal2 = self.numberstr2
+            
+            if self.base1 == 'b':
+                decimal1 = self.converter.convertFromBinary(self.numberstr1)
+            elif self.base1 == 'o':
+                decimal1 = self.converter.convertFromOctal(self.numberstr1)
+            elif self.base1 == 'h':
+                decimal1 = self.converter.convertFromHex(self.numberstr1)
+                
+            if self.base2 == 'b':
+                decimal2 = self.converter.convertFromBinary(self.numberstr2)
+            elif self.base2 == 'o':
+                decimal2 = self.converter.convertFromOctal(self.numberstr2)
+            elif self.base2 == 'h':
+                decimal2 = self.converter.convertFromHex(self.numberstr2)
+                
+            if self.operator == '+':
+                self.result = int(decimal1) + int(decimal2)
+            elif self.operator == '-':
+                self.result = int(decimal1) - int(decimal2)
+                if self.result < 0:
+                    self.result = 0
+            elif self.operator == 'x':
+                self.result = int(decimal1) * int(decimal2)
+            elif self.operator == '/':
+                if decimal2 == '0':
+                    decimal2 = '1'
+                self.result = int(decimal1) / int(decimal2)
+            
+            self.numberstr1 = str(int(self.result))
+            self.base1 = 'd'
+            self.entry.delete(0, 'end')
+            self.entry.insert(0, self.numberstr1)
+            self.isCalculated = True
+            self.isNum1Done = False
+            self.numberstr2 = ''
+            
+            
     
     def addButtons(self):
         self.buttonframe.columnconfigure(0, weight=1)
@@ -278,56 +361,82 @@ class CalculatorGUI:
         
         btn1 = tk.Button(self.buttonframe, text="1", font=('Arial', 16), command=self.add1)
         btn1.grid(row=0, column=0, sticky=tk.W+tk.E)
+        
         btn2 = tk.Button(self.buttonframe, text="2", font=('Arial', 16), command=self.add2)
         btn2.grid(row=0, column=1, sticky=tk.W+tk.E)
+        
         btn3 = tk.Button(self.buttonframe, text="3", font=('Arial', 16), command=self.add3)
         btn3.grid(row=0, column=2, sticky=tk.W+tk.E)
+        
         btn4 = tk.Button(self.buttonframe, text="4", font=('Arial', 16), command=self.add4)
         btn4.grid(row=0, column=3, sticky=tk.W+tk.E)
+        
         btn5 = tk.Button(self.buttonframe, text="5", font=('Arial', 16), command=self.add5)
         btn5.grid(row=1, column=0, sticky=tk.W+tk.E)
+        
         btn6 = tk.Button(self.buttonframe, text="6", font=('Arial', 16), command=self.add6)
         btn6.grid(row=1, column=1, sticky=tk.W+tk.E)
+        
         btn7 = tk.Button(self.buttonframe, text="7", font=('Arial', 16), command=self.add7)
         btn7.grid(row=1, column=2, sticky=tk.W+tk.E)
+        
         btn8 = tk.Button(self.buttonframe, text="8", font=('Arial', 16), command=self.add8)
         btn8.grid(row=1, column=3, sticky=tk.W+tk.E)
+        
         btn9 = tk.Button(self.buttonframe, text="9", font=('Arial', 16), command=self.add9)
         btn9.grid(row=2, column=0, sticky=tk.W+tk.E)
+        
         btnA = tk.Button(self.buttonframe, text="A", font=('Arial', 16), command=self.addA)
         btnA.grid(row=2, column=1, sticky=tk.W+tk.E)
+        
         btnB = tk.Button(self.buttonframe, text="B", font=('Arial', 16), command=self.addB)
         btnB.grid(row=2, column=2, sticky=tk.W+tk.E)
+        
         btnC = tk.Button(self.buttonframe, text="C", font=('Arial', 16), command=self.addC)
         btnC.grid(row=2, column=3, sticky=tk.W+tk.E)
+        
         btnD = tk.Button(self.buttonframe, text="D", font=('Arial', 16), command=self.addD)
         btnD.grid(row=3, column=0, sticky=tk.W+tk.E)
+        
         btnE = tk.Button(self.buttonframe, text="E", font=('Arial', 16), command=self.addE)
         btnE.grid(row=3, column=1, sticky=tk.W+tk.E)
+        
         btnF = tk.Button(self.buttonframe, text="F", font=('Arial', 16), command=self.addF)
         btnF.grid(row=3, column=2, sticky=tk.W+tk.E)
+        
         btn0 = tk.Button(self.buttonframe, text="0", font=('Arial', 16), command=self.add0)
         btn0.grid(row=3, column=3, sticky=tk.W+tk.E)
+        
         btnAdd = tk.Button(self.buttonframe, text="+", font=('Arial', 16), command=self.setAdd)
         btnAdd.grid(row=0, column=4, sticky=tk.W+tk.E)
+        
         btnSub = tk.Button(self.buttonframe, text="-", font=('Arial', 16), command=self.setSubtract)
         btnSub.grid(row=1, column=4, sticky=tk.W+tk.E)
+        
         btnMult = tk.Button(self.buttonframe, text="*", font=('Arial', 16), command=self.setMultiply)
         btnMult.grid(row=2, column=4, sticky=tk.W+tk.E)
+        
         btnDiv = tk.Button(self.buttonframe, text="/", font=('Arial', 16), command=self.setDivide)
         btnDiv.grid(row=3, column=4, sticky=tk.W+tk.E)
+        
         btnDeci = tk.Button(self.buttonframe, text="Decimal", font=('Arial', 16), command=self.setDecimal)
         btnDeci.grid(row=4, column=0, sticky=tk.W+tk.E)
+        
         btnBinary = tk.Button(self.buttonframe, text="Binary", font=('Arial', 16), command=self.setBinary)
         btnBinary.grid(row=4, column=1, sticky=tk.W+tk.E)
+        
         btnOct = tk.Button(self.buttonframe, text="Octal", font=('Arial', 16), command=self.setOctal)
         btnOct.grid(row=4, column=2, sticky=tk.W+tk.E)
+        
         btnHex = tk.Button(self.buttonframe, text="Hexadecimal", font=('Arial', 16), command=self.setHexadecimal)
         btnHex.grid(row=4, column=3, sticky=tk.W+tk.E)
+        
         btnClear = tk.Button(self.buttonframe, text="Clear", font=("Arial", 16), command=self.clear)
         btnClear.grid(row=5, column=0, sticky=tk.W+tk.E)
-        btnEqual = tk.Button(self.buttonframe, text="=", font=('Arial', 16))
+        
+        btnEqual = tk.Button(self.buttonframe, text="=", font=('Arial', 16), command=self.calculate)
         btnEqual.grid(row=4, column=4, sticky=tk.W+tk.E)
+        
         self.buttonframe.pack(fill='both')
         
 if __name__ == "__main__":
