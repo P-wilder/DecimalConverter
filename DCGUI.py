@@ -33,7 +33,7 @@ class CalculatorGUI:
                 self.base1 = 'o'
             elif base == 'h':
                 self.base1 = 'h'
-        elif self.isCalculated == True:
+        elif self.isCalculated == True and self.operator == '':
             if base == 'd':
                 match self.base1:
                     case 'b':
@@ -114,7 +114,7 @@ class CalculatorGUI:
         self.setOperator('/')
         
     def addNumberToString(self, value):
-        if self.isNum1Done == False:
+        if self.isNum1Done == False and self.isCalculated == False:
             if self.numberstr1 != '' :
                 self.entry.delete(0, "end")
             self.numberstr1 += value
@@ -130,6 +130,7 @@ class CalculatorGUI:
         self.numberstr2 = ''
         self.isNum1Done = False
         self.entry.delete(0, "end")
+        self.isCalculated = False
         
     def add1(self):
         self.addNumberToString('1')
@@ -349,6 +350,7 @@ class CalculatorGUI:
             self.isCalculated = True
             self.isNum1Done = False
             self.numberstr2 = ''
+            self.operator = ''
             
             
     
