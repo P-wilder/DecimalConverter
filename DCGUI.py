@@ -75,28 +75,105 @@ class CalculatorGUI:
         self.addNumberToString('1')
     
     def add2(self):
-        self.addNumberToString('2')
+        if self.isNum1Done == False:
+            if self.base1 == 'b':
+                pass
+            else:
+                self.addNumberToString('2')
+        else:
+            if self.base2 == 'b':
+                pass
+            else:
+                self.addNumberToString('2')
+        
     
     def add3(self):
-        self.addNumberToString('3')
+        if self.isNum1Done == False:
+            if self.base1 == 'b':
+                pass
+            else:
+                self.addNumberToString('3')
+        else:
+            if self.base2 == 'b':
+                pass
+            else:
+                self.addNumberToString('3')
+        
     
     def add4(self):
-        self.addNumberToString('4')
+        if self.isNum1Done == False:
+            if self.base1 == 'b':
+                pass
+            else:
+                self.addNumberToString('4')
+        else:
+            if self.base2 == 'b':
+                pass
+            else:
+                self.addNumberToString('4')
+        
         
     def add5(self):
-        self.addNumberToString('5')
+        if self.isNum1Done == False:
+            if self.base1 == 'b':
+                pass
+            else:
+                self.addNumberToString('5')
+        else:
+            if self.base2 == 'b':
+                pass
+            else:
+                self.addNumberToString('5')
+        
         
     def add6(self):
-        self.addNumberToString('6')
+        if self.isNum1Done == False:
+            if self.base1 == 'b':
+                pass
+            else:
+                self.addNumberToString('6')
+        else:
+            if self.base2 == 'b':
+                pass
+            else:
+                self.addNumberToString('6')
+        
         
     def add7(self):
-        self.addNumberToString('7')
+        if self.isNum1Done == False:
+            if self.base1 == 'b':
+                pass
+            else:
+                self.addNumberToString('7')
+        else:
+            if self.base2 == 'b':
+                pass
+            else:
+                self.addNumberToString('7')
         
     def add8(self):
-        self.addNumberToString('8')
+        if self.isNum1Done == False:
+            if self.base1 != 'h' or self.base1 != 'd':
+                pass
+            else:
+                self.addNumberToString('8')
+        else:
+            if self.base2 != 'h' or self.base2 != 'd':
+                pass
+            else:
+                self.addNumberToString('8')
         
     def add9(self):
-        self.addNumberToString('9')
+        if self.isNum1Done == False:
+            if self.base1 != 'h' or self.base1 != 'd':
+                pass
+            else:
+                self.addNumberToString('9')
+        else:
+            if self.base2 != 'h' or self.base2 != 'd':
+                pass
+            else:
+                self.addNumberToString('9')
         
     def addA(self):
         if self.isNum1Done == False:
@@ -234,6 +311,5 @@ class CalculatorGUI:
         btnEqual.grid(row=4, column=4, sticky=tk.W+tk.E)
         self.buttonframe.pack(fill='both')
         
-
 if __name__ == "__main__":
     CalculatorGUI()
